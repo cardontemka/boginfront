@@ -1,0 +1,30 @@
+.contain {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    position: fixed;
+    z-index: 3;
+    padding: 40px 0 0 0;
+    background-image: linear-gradient(rgb(255, 255, 255), rgba(0, 0, 0, 0));
+}
+
+.textButton {
+    color: rgba(2, 181, 137, 1);
+    cursor: pointer;
+    font-weight: 600;
+    margin: 0 40px;
+}
+
+.button {
+    border: none;
+    border-radius: 20px;
+    background-color: rgba(2, 181, 137, 1);
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    height: 40px;
+    padding: 0 3%;
+    margin: 0 3% 0 0;
+}
