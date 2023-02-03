@@ -23,19 +23,31 @@ export const Home = () => {
         <div className={items.contain}>
             <img src={linkIcon} className={items.linkIcon} />
             <img src={boginoo} className={items.logo} />
-            <div className={styles.inputCont}>
-                <input
-                    type="text"
-                    placeholder='https://www.web-huudas.mn'
-                    className={styles.input}
-                />
-                <button className={styles.button}>БОГИНОСГОХ</button>
-                {
+            <div className={styles.mainCont}>
+                <div className={styles.inputCont}>
+                    <input
+                        type="text"
+                        placeholder='https://www.web-huudas.mn'
+                        className={styles.input}
+                    />
+                    <button className={styles.button}>БОГИНОСГОХ</button>
+                </div>
+                {links && <p>Түүх</p>}
+                {links &&
                     links.map((item, index) => {
                         return (
-                            <div>
-                                <p>{item.url}</p>
-                                <a href={`http://localhost:8287/${item.short}`}>{'http://localhost:8287/' + item.short}</a>
+                            <div className={styles.linkCont}>
+                                <div className={styles.urlCont}>
+                                    <p className={styles.title}>Өгөгдсөн холбоос:</p>
+                                    <p className={styles.url}>{item.url}</p>
+                                </div>
+                                <div className={styles.urlCont}>
+                                    <p className={styles.title}>Богино холбоос:</p>
+                                    <div className={styles.shortCont}>
+                                        <a className={styles.url} href={`http://localhost:8287/${item.short}`}>{'http://localhost:8287/' + item.short}</a>
+                                        <p className={styles.copy} onClick={() => {navigator.clipboard.writeText(`http://localhost:8287/${item.short}`)}}>Хуулж авах</p>
+                                    </div>
+                                </div>
                             </div>
                         )
                     })
