@@ -7,6 +7,7 @@ import axios from 'axios'
 
 export const Home = () => {
     const [links, setLinks] = useState([]);
+    const [url, setUrl] = useState('');
 
     useEffect(() => {
         axios.get('http://localhost:8287/links')
@@ -20,7 +21,7 @@ export const Home = () => {
 
 
     return (
-        <div className={items.contain}>
+        <div className={styles.contain}>
             <img src={linkIcon} className={items.linkIcon} />
             <img src={boginoo} className={items.logo} />
             <div className={styles.mainCont}>
@@ -32,7 +33,7 @@ export const Home = () => {
                     />
                     <button className={styles.button}>БОГИНОСГОХ</button>
                 </div>
-                {links && <p>Түүх</p>}
+                {links.length !== 0 && <p className={styles.tuuh}>Түүх</p>}
                 {links &&
                     links.map((item, index) => {
                         return (

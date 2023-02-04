@@ -1,7 +1,7 @@
 /* unvisited link */
 a:link {
-  color: black;
   text-decoration: none;
+  color: black;
 }
 
 /* visited link */
