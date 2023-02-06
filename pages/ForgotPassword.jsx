@@ -9,7 +9,9 @@ export const ForgotPassword = () => {
             <img src={linkIcon} className={items.linkIcon} />
             <img src={boginoo} className={items.logo} />
             <p className={items.title}>Нууц үг сэргээх</p>
-            <div className={styles.textCont}>Бид таны цахим хаяг руу нууц үг сэргээх хаяг явуулах болно.</div>
+            <div className={styles.textCont}>
+                <p>Бид таны цахим хаяг руу нууц үг сэргээх хаяг явуулах болно.</p>
+            </div>
             <div className={styles.mainCont}>
                 <p className={items.text}>Цахим хаяг</p>
                 <input

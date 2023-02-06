@@ -10,15 +10,14 @@ export const Home = () => {
     const [url, setUrl] = useState('');
 
     useEffect(() => {
-        axios.get('http://localhost:8287/links')
+        axios.get(`http://localhost:8287/user/${window.localStorage.getItem('userId')}`)
             .then((res) => {
-                setLinks(res.data)
+                setLinks(res.data.links)
             })
             .catch((error) => {
                 console.log(error)
             })
     });
-
 
     return (
         <div className={styles.contain}>
@@ -30,14 +29,16 @@ export const Home = () => {
                         type="text"
                         placeholder='https://www.web-huudas.mn'
                         className={styles.input}
+                        onChange={(e) => setUrl(e.target.value)}
+                        value={url}
                     />
                     <button className={styles.button}>БОГИНОСГОХ</button>
                 </div>
-                {links.length !== 0 && <p className={styles.tuuh}>Түүх</p>}
+                {links && <p className={styles.tuuh}>Түүх</p>}
                 {links &&
                     links.map((item, index) => {
                         return (
-                            <div className={styles.linkCont}>
+                            <div className={styles.linkCont} key={index}>
                                 <div className={styles.urlCont}>
                                     <p className={styles.title}>Өгөгдсөн холбоос:</p>
                                     <p className={styles.url}>{item.url}</p>

@@ -2,8 +2,10 @@ import styles from './styles/Sign.module.css'
 import items from './styles/Items.module.css'
 import boginoo from './images/Boginoo.png'
 import linkIcon from './images/link.png'
+import { useState } from 'react'
 
 export const Sign = () => {
+    const [email, setEmail] = useState('')
     return (
         <div className={styles.contain}>
             <img src={linkIcon} className={items.linkIcon} />

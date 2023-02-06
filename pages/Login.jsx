@@ -2,25 +2,57 @@ import styles from './styles/Login.module.css'
 import items from './styles/Items.module.css'
 import boginoo from './images/Boginoo.png'
 import linkIcon from './images/link.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import axios from 'axios'
 
 export const Login = () => {
+    const navigate = useNavigate();
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        axios
+            .post("http://localhost:8287/login", {
+                username: username,
+                password: password,
+            })
+            .then(res => {
+                if (res.status) {
+                    window.localStorage.setItem('userId', res.data.user._id);
+                    console.log(res.data)
+                    navigate('/', {replace: true})
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
     return (
         <div className={styles.contain}>
             <img src={linkIcon} className={items.linkIcon} />
             <img src={boginoo} className={items.logo} />
             <p className={items.title}>Нэвтрэх</p>
             <div className={styles.mainCont}>
-                <p className={items.text}>Цахим хаяг</p>
+                <label htmlFor='email-address' className={items.text}>Цахим хаяг</label>
                 <input
                     type="text"
+                    id='email-address'
                     placeholder='name@mail.domain'
+                    label="email-address"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     className={items.input}
                 />
-                <p className={items.text}>Нууц үг</p>
+                <label htmlFor='password' className={items.text}>Нууц үг</label>
                 <input
                     type="password"
+                    id='password'
                     placeholder='••••••••••'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     className={items.input}
                 />
                 <div className={styles.recomendCont}>
@@ -32,7 +64,7 @@ export const Login = () => {
                         <p className={items.underLine}>Нууц үгээ мартсан</p>
                     </Link>
                 </div>
-                <button className={items.button}>НЭВТРЭХ</button>
+                <button className={items.button} onClick={onSubmit}>НЭВТРЭХ</button>
             </div>
             <Link to='/signup'>
                 <p className={`${items.underLine} ${items.greenText}`}>Шинэ хэрэглэгч бол энд дарна уу?</p>
