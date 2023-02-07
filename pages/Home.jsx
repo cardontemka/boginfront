@@ -2,22 +2,45 @@ import styles from './styles/Home.module.css'
 import items from './styles/Items.module.css'
 import boginoo from './images/Boginoo.png'
 import linkIcon from './images/link.png'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
+import { ThemeContext } from '../provider/ThemeContext'
 
 export const Home = () => {
     const [links, setLinks] = useState([]);
     const [url, setUrl] = useState('');
+    const {userId, setUserId} = useContext(ThemeContext)
 
     useEffect(() => {
-        axios.get(`http://localhost:8287/user/${window.localStorage.getItem('userId')}`)
+        setUserId(window.localStorage.getItem('userId'));
+    }, [userId])
+
+    useEffect(() => {
+        axios
+            .get(`http://localhost:8287/user/${window.localStorage.getItem('userId')}`)
             .then((res) => {
+                console.log(res)
                 setLinks(res.data.links)
             })
             .catch((error) => {
                 console.log(error)
             })
-    });
+    }, [userId, url]);
+
+    const translink = () => {
+        axios
+            .post('http://localhost:8287/links', {
+                url: url,
+                author_id: userId
+            })
+            .then(res => {
+                setUrl('');
+                console.log(res)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
 
     return (
         <div className={styles.contain}>
@@ -32,9 +55,10 @@ export const Home = () => {
                         onChange={(e) => setUrl(e.target.value)}
                         value={url}
                     />
-                    <button className={styles.button}>БОГИНОСГОХ</button>
+                    <button className={styles.button} onClick={translink}>БОГИНОСГОХ</button>
                 </div>
-                {links && <p className={styles.tuuh}>Түүх</p>}
+                {console.log(links)}
+                {links && links.length > 0  && <p className={styles.tuuh}>Түүх</p>}
                 {links &&
                     links.map((item, index) => {
                         return (
