@@ -22,15 +22,13 @@ export const Sign = () => {
                 password: password,
             })
             .then(res => {
-                if (res.status) {
-                    if (password === verifyPassword) {
-                        window.localStorage.setItem('userId', res.data._id);
-                        setUserId(res.data.user._id);
-                        console.log(res.data)
-                        navigate('/', {replace: true})
-                    } else {
-                        console.log('password is incorrect')
-                    }
+                if (password === verifyPassword) {
+                    window.localStorage.setItem('userId', res.data._id);
+                    setUserId(res.data._id);
+                    console.log(res.data)
+                    navigate('/', { replace: true })
+                } else {
+                    console.log('password is incorrect')
                 }
             })
             .catch(error => {

@@ -31,11 +31,15 @@ export const Header = () => {
             </NavLink>
             {email ?
                 <div className={styles.button} onClick={logout}>
-                    {email}
+                    <p className={styles.text}>{email}</p>
+                    <p className={styles.text}>Log out</p>
+                    <p className={styles.text}>Delete user</p>
                 </div>
                 :
                 <NavLink to='/login' className={styles.button}>
-                    НЭВТРЭХ
+                    <p className={styles.text}>
+                        НЭВТРЭХ
+                    </p>
                 </NavLink>
             }
         </div>

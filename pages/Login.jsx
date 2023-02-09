@@ -21,12 +21,10 @@ export const Login = () => {
                 password: password,
             })
             .then(res => {
-                if (res.status) {
-                    window.localStorage.setItem('userId', res.data._id);
-                    setUserId(res.data._id);
-                    console.log(res.data)
-                    navigate('/', {replace: true})
-                }
+                console.log(res)
+                window.localStorage.setItem('userId', res.data.user._id);
+                setUserId(res.data.user._id);
+                navigate('/', { replace: true })
             })
             .catch(error => {
                 console.log(error);

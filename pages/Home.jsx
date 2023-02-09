@@ -9,6 +9,7 @@ import { ThemeContext } from '../provider/ThemeContext'
 export const Home = () => {
     const [links, setLinks] = useState([]);
     const [url, setUrl] = useState('');
+    const [click, setClick] = useState(false);
     const {userId, setUserId} = useContext(ThemeContext)
 
     useEffect(() => {
@@ -19,13 +20,13 @@ export const Home = () => {
         axios
             .get(`http://localhost:8287/user/${window.localStorage.getItem('userId')}`)
             .then((res) => {
-                console.log(res)
+                console.log(res.data)
                 setLinks(res.data.links)
             })
             .catch((error) => {
                 console.log(error)
             })
-    }, [userId, url]);
+    }, [userId, click]);
 
     const translink = () => {
         axios
@@ -35,7 +36,8 @@ export const Home = () => {
             })
             .then(res => {
                 setUrl('');
-                console.log(res)
+                setClick(!click);
+                // console.log(res)
             })
             .catch(error => {
                 console.log(error)
@@ -57,7 +59,6 @@ export const Home = () => {
                     />
                     <button className={styles.button} onClick={translink}>БОГИНОСГОХ</button>
                 </div>
-                {console.log(links)}
                 {links && links.length > 0  && <p className={styles.tuuh}>Түүх</p>}
                 {links &&
                     links.map((item, index) => {
